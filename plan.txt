@@ -7,6 +7,7 @@ Part A and B happen in parallel
 Part 0: (Plan) [Due 17th April]
 read 4? papers
 choose a system to model - [3rd April]
+Convert Flocking algorithm in java to matlab
 Generate ideas
 Figure out Pros and Cons
 Find academic papers on chosen topic
