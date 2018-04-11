@@ -17,6 +17,10 @@ Part A and B happen in parallel
      - Figure out Pros and Cons
      - Choose as a group - SHARKS VS FISH!
      - Find academic papers on chosen topic - Pierre
+       1. SCHOOLING BEHAVIOR IN THE GUPPY (POECILIA RETICULATA): AN EVOLUTIONARY RESPONSE TO PREDATION https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1558-5646.1974.tb00774.x
+       2. A comparison of shark and wolf research reveals similar behavioral responses by prey https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/090226
+       3. Flocking for multi-agent dynamic systems: algorithms and theory https://ieeexplore.ieee.org/abstract/document/1605401/
+       4. Flocking Behaviour https://pdfs.semanticscholar.org/c4a1/25fe7af0e42f85a6d98df3b7a192c42d3428.pdf
      - Each read 1 academic paper
      - Maybe the fish could be atlantic herring, since they display flocking hunting behaviour, but also are hunted. 
    - which entities are agents?
