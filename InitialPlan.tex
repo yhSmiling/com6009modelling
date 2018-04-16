@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{titlesec}
+
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+\usepackage[margin=1.5in]{geometry}
+
+\begin{document}
+\pagestyle{empty}
+
+
+
+\section{Description of Natural System}
+
+Atlantic Herring are a schooling fish which hunt copepods using a technique known as "Ram Feeding". The copepods have an evasive jump that is faster than any individual herring, but the herring school in a grid that corresponds to the typical jump distance of the copepods. The school succeeds at catching copepods where individuals fail.
+
+\section{Research Question}
+
+Are schooling herring more effective at hunting copepods than those that do not school, or herring that school with different grid distances?
+
+\section{Agent types}
+
+\begin{enumerate}
+\itemsep 0em 
+\item Herring - Position, Direction, Velocity, Acceleration, Sense radius, Herring Attraction, Copepod Attraction, Alignment strength,  Hunger? Fatigue?
+\item Copepod - Position, Direction, Velocity, Acceleration, Sense radius, Jump distance/velocity
+\end{enumerate}
+
+\section{Functions/Behaviours}
+
+\begin{itemize}
+\itemsep 0em 
+\item findAgentsInRadius
+\item calcHerringVect
+\item eatCopepod
+\item calcCopepodVect
+\item copepodJump
+
+\end{itemize}
+
+
+\section{Flow diagram}
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20,
+    text width=5em, text centered, rounded corners, minimum height=2em, node distance=2.4cm]
+\tikzstyle{line} = [draw, very thick, color=black!50, -latex']
+
+\begin{tikzpicture}[scale=2, node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (init) {initialize model};
+    \node [block, right of=init] (nsteps) {for i = 1:num steps};
+    \node [block, below of=nsteps, xshift = 1cm] (nrules) {for m = 1:num rules};
+    \node [block, right of=nrules] (rules) {Rules: 1. Sense 2. Move 3. Eat};
+    
+    \node [block, below of=nrules, xshift = 1cm] (nagents) {for a = 1:num agents};
+    \node [block, right of=nagents] (agenttypes) {Shuffled list of copepods + herring};
+    
+    \node [block, below of=nagents, xshift = 1cm] (agent) {apply rule m to agent a};
+    \node [block, left of=agent, xshift = -3cm] (output) {Save/plot output};
+   
+    \path [line] (init) -- (nsteps);
+    \path [line] (nsteps) -- (nrules);
+    \path [line] (nrules) -- (nagents);
+    \path [line] (nagents) -- (agent);
+    \path [line] (agent) -- (output);
+    
+\end{tikzpicture}
+
+\end{document}
