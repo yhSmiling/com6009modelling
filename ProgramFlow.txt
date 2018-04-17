@@ -1,0 +1,36 @@
+
+
+Herring
+
+0. Calc distance to all other agents based on MessageTablePrevious (maybe use a quadtree to make this efficient later)
+1. Get a list of agents within sensing radius.
+2. Eat copepods within eating radius.
+3. Add movement forces to self.
+
+	a. Calc separation force
+		for each fish closer than X:
+			calc vector pointing away from neighbor
+			weight by distance
+			add to sum
+			add to count
+		divide sum by count
+		
+	b. Calc alignment force
+		for each fish closer than Y:
+			add velocity
+			add to count
+		divide velocity by count
+			
+	c. Calc cohesion force
+		for each fish closer than Z:
+			add other_fish.position
+			add to count
+			
+			divide sum of positions by count
+			seek that divided sum
+	
+	d. Apply weighted sum of forces
+	e. Steer based on force (basically, don't go over the max_speed, don't turn faster than herring can turn etc)
+4. Update properties (position, velocity, acceleration, hunger etc) send to MessageTableCurrent
+
+After all agents have been iterated over, set MessageTablePrevious = MessageTableCurrent
