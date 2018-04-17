@@ -99,3 +99,6 @@ Boids
 
 Background and Update 
 http://www.red3d.com/cwr/boids/
+
+flocking code example: use 
+https://uk.mathworks.com/matlabcentral/fileexchange/32022-swarmfish-the-artificial-fish-swarm-algorithm
