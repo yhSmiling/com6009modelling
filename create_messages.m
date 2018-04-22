@@ -1,4 +1,4 @@
-function create_messages(nr,nf,agent)
+function create_messages(nc,nh,agent)
 
 %function that populates the global data structure representing
 %message information
@@ -6,7 +6,7 @@ function create_messages(nr,nf,agent)
 %MESSAGES is a data structure containing information that agents need to
 %broadcast to each other
    %    MESSAGES.atype - n x 1 array listing the type of each agent in the model
-   %    (1=rabbit, 2-fox, 3=dead agent)
+   %    (1=herring, 2-copepod, 3=dead agent)
    %    MESSAGES.pos - list of every agent position in [x y]
    %    MESSAGE.dead - n x1 array containing ones for agents that have died
    %    in the current iteration
@@ -14,10 +14,10 @@ function create_messages(nr,nf,agent)
  global MESSAGES
  
  for an=1:length(agent)
-     if isa(agent{an},'rabbit')
+     if isa(agent{an},'copepod')
         MESSAGES.atype(an)=1;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
-     elseif isa(agent{an},'fox')
+     elseif isa(agent{an},'herring')
         MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
      else

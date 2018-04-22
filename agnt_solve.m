@@ -17,8 +17,8 @@ prev_n=n;   %remember current agent number at the start of this iteration
 %execute existing agent update loop
 for cn=1:n
 	curr=agent{cn};
-    if isa(curr,'rabbit')|isa(curr,'fox')
-        [curr,eaten]=eat(curr,cn);               %eating rules (rabbits eat food, foxes eat rabbits)
+    if isa(curr,'copepod')|isa(curr,'herring')
+        [curr,eaten]=eat(curr,cn);               %eating rules (copepods eat food, herring eat copepods)
         if eaten==0
             curr=migrate(curr,cn);              %if no food was eaten, then migrate in search of some
         end
