@@ -5,46 +5,33 @@ function loc_agents = extract_local_live_agents(agent,sense_radius)
 %This function also makes corrections in the case that the agent is close
 %to the model edge
 
-global ENV_DATA MESSAGES
+global MESSAGES
 
 pos = get(agent, 'pos');
 
 % NOTE(Pierre): Maybe we need to feed in a list of possible candidates (i.e.
 % via some sort of quadtree), rather than checking the distance to all
-% other agents?
+% other agents? Also, we want to only find OTHER agents, not the current
+% agent. How to do this?
 typ=MESSAGES.atype;                                         %extract types of all agents
-cpds=find(typ==1|typ==2);                                    %indices of all herring + copepods (live + dead)
-cpos=MESSAGES.pos(cpds,:);                                     %extract positions of all copepods
+liveagents=find(typ==1|typ==2);                                    %indices of all herring + copepods (live + dead)
+cpos=MESSAGES.pos(liveagents,:);                                     %extract positions of all copepods
 csep=sqrt((cpos(:,1)-pos(:,1)).^2+(cpos(:,2)-pos(:,2)).^2);
+within_radius = zeros(size(csep));
+for i = 1:length(csep)
+    if csep(i) > sense_radius
+        within_radius(i) = 0;
+    else
+        within_radius(i) = 1;
+    end
+end
+% within_radius has 1s at the indexes where other agents are.
+% NOTE(Pierre): We could use logical indexing to get all of the data out,
+% using this array feature. It acts like a mask. Like A = [14,25,3] B =
+% [1,0,1] A(B) = [14,3]
+% localsep = csep(logical(within_radius))
 
-%ENV_DATA is a data structure containing information about the model
-   %environment
-   %    ENV_DATA.shape - shape of environment - FIXED AS SQUARE
-   %    ENV_DATA.units - FIXED AS KM
-   %    ENV_DATA.bm_size - length of environment edge in km
-   %    ENV_DATA.food is  a bm_size x bm_size array containing distribution
-   %    of food
 
-if cpos(1)>ENV_DATA.bm_size-sense_radius
-    xmax=ENV_DATA.bm_size;
-else
-    xmax=cpos(1)+sense_radius;
-end
-if cpos(1)<sense_radius+1
-    xmin=1;
-else
-    xmin=cpos(1)-sense_radius;
-end
-if cpos(2)>ENV_DATA.bm_size-sense_radius
-    ymax=ENV_DATA.bm_size;
-else
-    ymax=cpos(2)+sense_radius;
-end
-if cpos(2)<sense_radius+1
-    ymin=1;
-else
-    ymin=cpos(2)-sense_radius;
-end
-
-loc_agents= "Hey, here's a list of agents, guys!";    %extract distribution of food within the local search radius
+close_live_agents = liveagents(logical(within_radius))
+loc_agents = close_live_agents;
 
