@@ -2,11 +2,11 @@ function plot_results(agent,nsteps,fmode,outImages)
 
     %Plots 2d patch images of agents onto background 
     %%%%%%%%%%%
-    %plot_results(agent,nr,nf)
+    %plot_results(agent,nc,nh)
     %%%%%%%%%%%
     %agent - current list of agent structures
-    %nr -  no. rabbits
-    %nf -  no. rabbits
+    %nc -  no. copepods
+    %nh -  no. herring
 
     % Modified by D Walker 3/4/08
 
@@ -21,15 +21,15 @@ function plot_results(agent,nsteps,fmode,outImages)
     %broadcast to each other
 
     %write results to the screen
-    nr=IT_STATS.tot_r;
-    nf=IT_STATS.tot_f;
+    nc=IT_STATS.tot_c;
+    nh=IT_STATS.tot_h;
     disp(strcat('Iteration = ',num2str(N_IT)))
-    disp(strcat('No. new rabbits = ',num2str(IT_STATS.div_r(N_IT+1))))
-    disp(strcat('No. new foxes = ',num2str(IT_STATS.div_f(N_IT+1))))
+    disp(strcat('No. new copepods = ',num2str(IT_STATS.div_c(N_IT+1))))
+    disp(strcat('No. new herring = ',num2str(IT_STATS.div_h(N_IT+1))))
     disp(strcat('No. agents migrating = ',num2str(IT_STATS.mig(N_IT+1))))
-    disp(strcat('No. rabbits dying = ',num2str(IT_STATS.died_r(N_IT+1))))
-    disp(strcat('No. foxes dying = ',num2str(IT_STATS.died_f(N_IT+1))))
-    disp(strcat('No. rabbits eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
+    disp(strcat('No. copepods dying = ',num2str(IT_STATS.died_c(N_IT+1))))
+    disp(strcat('No. herring dying = ',num2str(IT_STATS.died_h(N_IT+1))))
+    disp(strcat('No. copepods eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
 
     %plot line graphs of agent numbers and remaining food
     if (fmode==false) || (N_IT==nsteps) || ((fmode==true) && (rem(N_IT , CONTROL_DATA.fmode_display_every)==0))
@@ -42,22 +42,22 @@ function plot_results(agent,nsteps,fmode,outImages)
         col{2}='b-';
 
         tot_food=IT_STATS.tfood;       %total food remaining
-        n=nr(N_IT+1)+nf(N_IT+1);             %current agent number
+        n=nc(N_IT+1)+nh(N_IT+1);             %current agent number
         f2=figure(2);
         set(f2,'Units','Normalized');
         set(f2,'Position',[0.5 0.5 0.45 0.4]);
 
         subplot(3,1,1),cla
-        subplot(3,1,1),plot((1:N_IT+1),nr(1:N_IT+1),col{1});
-        subplot(3,1,1),axis([0 nsteps 0 1.1*max(nr)]);
+        subplot(3,1,1),plot((1:N_IT+1),nc(1:N_IT+1),col{1});
+        subplot(3,1,1),axis([0 nsteps 0 1.1*max(nc)]);
         subplot(3,1,2),cla
-        subplot(3,1,2),plot((1:N_IT+1),nf(1:N_IT+1),col{2});
-        subplot(3,1,2),axis([0 nsteps 0 1.1*max(nf)]);
+        subplot(3,1,2),plot((1:N_IT+1),nh(1:N_IT+1),col{2});
+        subplot(3,1,2),axis([0 nsteps 0 1.1*max(nh)]);
         subplot(3,1,3),cla
         subplot(3,1,3),plot((1:N_IT+1),tot_food(1:N_IT+1),'m-');
         subplot(3,1,3),axis([0 nsteps 0 tot_food(1)]);
-        subplot(3,1,1),title('No. live rabbits');
-        subplot(3,1,2),title('No. live foxes');
+        subplot(3,1,1),title('No. live copepods');
+        subplot(3,1,2),title('No. live herring');
         subplot(3,1,3),title('Total food');
         drawnow
 
@@ -84,11 +84,11 @@ function plot_results(agent,nsteps,fmode,outImages)
         for cn=1:length(agent)                          %cycle through each agent in turn
             if typ(cn)>0                                %only plot live agents
                 pos=get(agent{cn},'pos');               %extract current position    
-                if isa(agent{cn},'rabbit')              %choose plot colour depending on agent type
-                    ro=plot(pos(1),pos(2),'r*');
-                else   
-                    fo=plot(pos(1),pos(2),'b.'); 
-                    set(fo,'MarkerSize',30);
+                if isa(agent{cn},'copepod')              %choose plot colour depending on agent type
+                    co=plot(pos(1),pos(2),'r*');
+                else
+                    ho=plot(pos(1),pos(2),'b.');
+                    set(ho,'MarkerSize',30);
                 end
             end
         end
