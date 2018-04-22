@@ -10,7 +10,7 @@ function [agt]=migrate(agt,cn)
 %degrees at it will try again (up to 8 times)
 %modified by D Walker 11/4/08
 
-global IT_STATS N_IT ENV_DATA
+global IT_STATS N_IT ENV_DATA MESSAGES
 
 %N_IT is current iteration number
 %IT_STATS is data structure containing statistics on model at each
@@ -28,6 +28,36 @@ sense_radius = 5;
 % NOTE(Pierre): This generates an array of all of the agents that are
 % within sensing radius.
 nearby_agents = extract_local_live_agents(agt,sense_radius);
+% TODO(Pierre): We need something like MESSAGES.Vect, which contains all
+% the vectors for the 
+
+% TODO(Pierre): Test that this is actually working!
+
+% TODO(Pierre): We might need to do 3 for loops. Like maybe the separation
+% force only comes into play with agents closer than 3, wheras align comes
+% into play with agents closer than 5, wheras cohes comes in closer than 7,
+% or something.
+sep_radius = 0.5 * sense_radius;
+align_radius = 0.7 * sense_radius;
+cohes_radius = 1 * sense_radius;
+for fish = 1:length(nearby_agents)
+    % Separation force:
+    tot_sep_force = [-6.3,-4.3];
+    % Alignment force:
+    tot_align_force = [3.3,1.2];
+    % Cohesion force:
+    tot_cohes_force = [2.7, 0.1];   
+end
+
+sep_weight = 0.6;
+align_weight = 0.25;
+cohes_weight = 0.15;
+overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * cohes_force);
+% TODO(Pierre): Some function that Steers based on force. Like it
+% shouldn't turn too fast or go faster than herring can go.
+
+
+
   
 bm=ENV_DATA.bm_size;   
 spd=agt.speed;   %herring migration speed in units per iteration - this is equal to the food search radius
