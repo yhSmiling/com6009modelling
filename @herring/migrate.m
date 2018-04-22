@@ -22,7 +22,12 @@ global IT_STATS N_IT ENV_DATA
    %    ENV_DATA.bm_size - length of environment edge in km
    %    ENV_DATA.food is  a bm_size x bm_size array containing distribution
    %    of food
-     
+   
+% TODO(Pierre): This should probably be set as a param of the agent
+sense_radius = 5;
+% NOTE(Pierre): This generates an array of all of the agents that are
+% within sensing radius.
+nearby_agents = extract_local_live_agents(agt,sense_radius);
   
 bm=ENV_DATA.bm_size;   
 spd=agt.speed;   %herring migration speed in units per iteration - this is equal to the food search radius
@@ -31,7 +36,10 @@ pos=agt.pos;     %extract current position
 mig=0;
 cnt=1;
 dir=rand*2*pi;              %herring has been unable to find food, so chooses a random direction to move in
+
+
 while mig==0&cnt<=8        %herring has up to 8 attempts to migrate (without leaving the edge of the model)
+    
     npos(1)=pos(1)+spd*cos(dir);        %new x co-ordinate
     npos(2)=pos(2)+spd*sin(dir);        %new y co-ordinate
     if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that herring has not left edge of model - correct if so.
