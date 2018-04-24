@@ -17,10 +17,10 @@ prev_n=n;   %remember current agent number at the start of this iteration
 for cn=1:n
 	curr=agent{cn};
     if isa(curr,'copepod')|isa(curr,'herring')
-        [curr,eaten]=eat(curr,cn);               %eating rules (copepods eat food, herring eat copepods)
-        if eaten==0
-            curr=migrate(curr,cn);              %if no food was eaten, then migrate in search of some
+        if isa(curr,'herring')
+            [curr,eaten]=eat(curr,cn);               %eating rules (copepods eat food, herring eat copepods)
         end
+        curr=migrate(curr,cn);              %if no food was eaten, then migrate in search of some
        agent{cn}=curr;                          %up date cell array with modified agent data structure
     end
 end

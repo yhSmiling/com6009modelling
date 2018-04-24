@@ -17,6 +17,7 @@ function create_messages(nc,nh,agent)
      if isa(agent{an},'copepod')
         MESSAGES.atype(an)=1;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
+        MESSAGES.vel(an,:)=get(agent{an},'vel');
      elseif isa(agent{an},'herring')
         MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
