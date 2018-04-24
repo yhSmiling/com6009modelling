@@ -1,4 +1,4 @@
-function [agt,eaten]=eat(agt,cn)
+function [agt]=eat(agt,cn)
 
 %eating function for class HERRING
 %agt=herring object
@@ -32,19 +32,22 @@ function [agt,eaten]=eat(agt,cn)
 
 global  IT_STATS N_IT MESSAGES
    
-pos=agt.pos;                        %extract current position 
-vel=agt.vel;                      %herring migration speed in units per iteration - this is equal to the food search radius
-
 eat_radius = 5;
-local = extract_local_agents(agt, eat_radius, 1)
+local = extract_local_agents(agt, eat_radius, 1);
 
-if length(local)>1       %if more than one copepod located at same distance then randomly pick one to head towards
-        s=round(rand*(length(nrst)-1))+1;
-        nrst=nrst(s);
+if length(local)>0
+    if length(local)>1       %if more than one copepod located at same distance then randomly pick one to head towards
+            s=round(rand*(length(local)-1))+1;
+            nrst=local(s);
+    else
+        nrst = local; %If length is not more than 1, must be exactly 1
+    end
+    IT_STATS.eaten(N_IT+1)=IT_STATS.eaten(N_IT+1)+1; %update model statistics
+    MESSAGES.dead(nrst)=1;       %send message to copepod so it knows it's dead!
 end
 
-IT_STATS.eaten(N_IT+1)=IT_STATS.eaten(N_IT+1)+1; %update model statistics
-MESSAGES.dead(nrst)=1;       %send message to copepod so it knows it's dead!
+
+
 
 
    

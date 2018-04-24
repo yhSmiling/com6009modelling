@@ -13,9 +13,13 @@ pos = get(agent, 'pos');
 % other agents? Also, we want to only find OTHER agents, not the current
 % agent. How to do this?
 typ=MESSAGES.atype;                                         %extract types of all agents
-typ
 liveagents=find(typ==agent_type);                                    %indices of all herring + copepods (live + dead). TODO(Pierre): Is this actually getting copepods?
+
 cpos=MESSAGES.pos(liveagents,:);                                     %extract positions of all copepods
+
+cpos
+pos
+
 csep=sqrt((cpos(:,1)-pos(:,1)).^2+(cpos(:,2)-pos(:,2)).^2);
 within_radius = zeros(size(csep));
 for i = 1:length(csep)

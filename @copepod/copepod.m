@@ -30,7 +30,7 @@ classdef copepod   %declares copepod object
                             error('Input argument is not a copepod')
                             
                        end
-                    case 5               %create a new copepod (currently the only constructor method used)
+                    case 4             %create a new copepod (currently the only constructor method used)
                         c.pos=varargin{1};               %current position in Cartesian co-ords [x y]
                         c.vel=varargin{2};             %number of kilometres copepod can migrate in 1 day
                         c.max_speed=varargin{3};        %number of iterations since copepod last reproduced.

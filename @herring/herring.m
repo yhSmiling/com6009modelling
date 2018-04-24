@@ -26,7 +26,7 @@ classdef herring          %declares herring object
                     else
                         error('Input argument is not a herring')
                     end
-                case 5                          %create a new herring (currently the only constructor method used)
+                case 4                         %create a new herring (currently the only constructor method used)
                     h.pos=varargin{1};               %current position in Cartesian co-ords [x y]
                     h.vel=varargin{2};
                     h.max_speed=varargin{3};             %number of cm herring can move in 1 second
