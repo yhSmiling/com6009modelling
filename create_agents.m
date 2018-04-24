@@ -29,10 +29,10 @@ for c=1:nc
     pos=cloc(c,:);
     %create copepod agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    age=ceil(rand*10);
-    food=ceil(rand*20)+20;
-    lbreed=round(rand*PARAM.C_BRDFQ);
-    agent{c}=copepod(age,food,pos,PARAM.C_SPD,lbreed);
+    vel=[0.7;0.9];
+    max_speed=30;
+    burst_speed=50;
+    agent{c}=copepod(pos,vel,max_speed,burst_speed);
 end
 
 %generate all herring agents and record their positions in ENV_MAT_H
@@ -40,8 +40,8 @@ for h=nc+1:nc+nh
     pos=hloc(h-nc,:);
     %create herring agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    age=ceil(rand*10);
-    food=ceil(rand*20)+20;
-    lbreed=round(rand*PARAM.H_BRDFQ);
-    agent{h}=herring(age,food,pos,PARAM.H_SPD,lbreed);
+    vel = [1.2;1.8];
+    max_speed = 25;
+    max_hunt_speed = 30;
+    agent{h}=herring(pos, vel, max_speed, max_hunt_speed);
 end
