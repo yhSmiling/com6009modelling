@@ -49,6 +49,7 @@ for fish = 1:length(nearby_agents)
     tot_cohes_force = [2.7, 0.1];   
 end
 
+% hunt_weight = 0.8
 sep_weight = 0.6;
 align_weight = 0.25;
 cohes_weight = 0.15;

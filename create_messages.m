@@ -20,6 +20,7 @@ function create_messages(nc,nh,agent)
      elseif isa(agent{an},'herring')
         MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
+        MESSAGES.vel(an,:)=get(agent{an},'vel');
      else
         MESSAGES.atype(an)=0; 
         MESSAGES.pos(an,:)=[-1 -1];
