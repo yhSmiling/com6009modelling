@@ -27,7 +27,7 @@ global IT_STATS N_IT ENV_DATA MESSAGES
 sense_radius = 5;
 % NOTE(Pierre): This generates an array of all of the agents that are
 % within sensing radius.
-nearby_agents = extract_local_live_agents(agt,sense_radius);
+nearby_herring = extract_local_agents(agt,sense_radius,2);
 % TODO(Pierre): We need something like MESSAGES.Vect, which contains all
 % the vectors for the 
 
@@ -40,7 +40,14 @@ nearby_agents = extract_local_live_agents(agt,sense_radius);
 sep_radius = 0.5 * sense_radius;
 align_radius = 0.7 * sense_radius;
 cohes_radius = 1 * sense_radius;
-for fish = 1:length(nearby_agents)
+
+% Separation force:
+tot_sep_force = [0.0,0.0];
+% Alignment force:
+tot_align_force = [0.0,0.0];
+% Cohesion force:
+tot_cohes_force = [0.0, 0.0];  
+for fish = 1:length(nearby_herring)
     % Separation force:
     tot_sep_force = [-6.3,-4.3];
     % Alignment force:
@@ -53,37 +60,37 @@ end
 sep_weight = 0.6;
 align_weight = 0.25;
 cohes_weight = 0.15;
-overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * cohes_force);
+overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * tot_cohes_force);
 % TODO(Pierre): Some function that Steers based on force. Like it
 % shouldn't turn too fast or go faster than herring can go.
 
 
 
   
-bm=ENV_DATA.bm_size;   
-spd=agt.speed;   %herring migration speed in units per iteration - this is equal to the food search radius
-pos=agt.pos;     %extract current position 
-
-mig=0;
-cnt=1;
-dir=rand*2*pi;              %herring has been unable to find food, so chooses a random direction to move in
-
-
-while mig==0&cnt<=8        %herring has up to 8 attempts to migrate (without leaving the edge of the model)
-    
-    npos(1)=pos(1)+spd*cos(dir);        %new x co-ordinate
-    npos(2)=pos(2)+spd*sin(dir);        %new y co-ordinate
-    if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that herring has not left edge of model - correct if so.
-       mig=1;
-    end
-    cnt=cnt+1;
-    dir=dir+(pi/4);         %if migration not successful, then increment direction by 45 degrees and try again
-end
-
-if mig==1
-    agt.pos=npos;                    %update agent memory
-    IT_STATS.mig(N_IT+1)=IT_STATS.mig(N_IT+1)+1;    %update model statistics
-end
+% bm=ENV_DATA.bm_size;   
+% vel=agt.speed;   %herring migration speed in units per iteration - this is equal to the food search radius
+% pos=agt.pos;     %extract current position 
+% 
+% mig=0;
+% cnt=1;
+% dir=rand*2*pi;              %herring has been unable to find food, so chooses a random direction to move in
+% 
+% 
+% while mig==0&cnt<=8        %herring has up to 8 attempts to migrate (without leaving the edge of the model)
+%     
+%     npos(1)=pos(1)+vel*cos(dir);        %new x co-ordinate
+%     npos(2)=pos(2)+vel*sin(dir);        %new y co-ordinate
+%     if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that herring has not left edge of model - correct if so.
+%        mig=1;
+%     end
+%     cnt=cnt+1;
+%     dir=dir+(pi/4);         %if migration not successful, then increment direction by 45 degrees and try again
+% end
+% 
+% if mig==1
+%     agt.pos=npos;                    %update agent memory
+%     IT_STATS.mig(N_IT+1)=IT_STATS.mig(N_IT+1)+1;    %update model statistics
+% end
 
 
     
