@@ -1,13 +1,9 @@
 classdef herring          %declares herring object
     properties         %define herring properties (parameters) 
-        %age; 
-        %food;
         pos;
         vel;
         max_speed;
         max_hunt_speed;
-        
-        %last_breed;
     end
     methods                         %note that this class definition mfile contains only the constructor method!
                                     %all additional member functions associated with this class are included as separate mfiles in the @herring folder. 
@@ -22,11 +18,8 @@ classdef herring          %declares herring object
 
             switch nargin                     %Use switch statement with nargin,varargin contructs to overload constructor methods
                 case 0                        %create default object
-%                     h.age=[];			
-%                     h.food=[];
                     h.pos=[];
                     h.max_speed=[];
-%                     h.last_breed=[];
                 case 1                         %input is already a herring, so just return!
                     if (isa(varargin{1},'herring'))		
                         h=varargin{1};
@@ -35,7 +28,9 @@ classdef herring          %declares herring object
                     end
                 case 5                          %create a new herring (currently the only constructor method used)
                     h.pos=varargin{1};               %current position in Cartesian co-ords [x y]
+                    h.vel=varargin{2};
                     h.max_speed=varargin{3};             %number of cm herring can move in 1 second
+                    h.max_hunt_speed=varargin{4};
                 otherwise
                     error('Invalid no. of input arguments for herring')
             end
