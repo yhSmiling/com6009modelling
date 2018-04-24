@@ -17,9 +17,6 @@ liveagents=find(typ==agent_type);                                    %indices of
 
 cpos=MESSAGES.pos(liveagents,:);                                     %extract positions of all copepods
 
-cpos
-pos
-
 csep=sqrt((cpos(:,1)-pos(:,1)).^2+(cpos(:,2)-pos(:,2)).^2);
 within_radius = zeros(size(csep));
 for i = 1:length(csep)

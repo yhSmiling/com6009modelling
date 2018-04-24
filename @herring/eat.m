@@ -32,7 +32,7 @@ function [agt]=eat(agt,cn)
 
 global  IT_STATS N_IT MESSAGES
    
-eat_radius = 5;
+eat_radius = 50;
 local = extract_local_agents(agt, eat_radius, 1);
 
 if length(local)>0
