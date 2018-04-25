@@ -30,6 +30,7 @@ if angle_diff > max_turning_rate
     desired_vect = [(desired_speed * cosd(new_angle)), (desired_speed * sind(new_angle))];
 end
 
+% Avoiding divide by zero mistakes
 if desired_speed > 0
     unit_vect = desired_vect / desired_speed;
 else

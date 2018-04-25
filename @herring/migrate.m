@@ -61,7 +61,18 @@ sep_weight = 0.6;
 align_weight = 0.25;
 cohes_weight = 0.15;
 overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * tot_cohes_force);
+% BUG(Pierre): Looks like some of these vels are getting set to 0 at the
+% start for some reason? Maybe getting the indexes wrong/confused with
+% copepods?
+
+% BUG(Pierre): They always seem to go in the positive direction? Why?
+minrand = -0.5;
+maxrand = 0.5;
+overall_force = [(maxrand-minrand)*rand + minrand, (maxrand-minrand)*rand + minrand];
 movement_vect = steer(agt.vel, overall_force);
+% BUG(Pierre): Something is going wrong in steer, where the first value is
+% never negative.
+movement_vect
 agt.vel = movement_vect;
 agt.pos = agt.pos + agt.vel;
 % TODO(Pierre): Some function that Steers based on force. Like it
