@@ -62,7 +62,8 @@ align_weight = 0.25;
 cohes_weight = 0.15;
 overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * tot_cohes_force);
 movement_vect = steer(agt.vel, overall_force);
-agt.pos = agt.pos + movement_vect
+agt.vel = movement_vect;
+agt.pos = agt.pos + agt.vel;
 % TODO(Pierre): Some function that Steers based on force. Like it
 % shouldn't turn too fast or go faster than herring can go.
 % Desired velocity, current velocity
