@@ -1,4 +1,4 @@
-function [ movement_vect ] = steer( desired_vect, curr_vect )
+function [ movement_vect ] = steer(curr_vect, desired_vect)
 %STEER This function limits the ability of the herring to change direction
 % or velocity instantly.
 %   Detailed explanation goes here
