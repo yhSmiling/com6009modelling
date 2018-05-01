@@ -94,6 +94,7 @@ Part A and B happen in parallel
 	 - Collect results
    - Analysis
 	 - Implement graphs/statistics (Yang + Cheng)
+	 - Make graphs continue after copepods are dead (make the graphs the same scale)
    - Optimise
      - If we have time (we don't)
 
