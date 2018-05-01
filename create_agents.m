@@ -24,13 +24,16 @@ hvec = (bm_size/20) * rand(nh,2); % Setting the speed of the herring
 
 MESSAGES.pos=[cloc;hloc];
 
-fast_copes = 0.1;
+fast_copes = 0.15;
 slow_copes = 0.05;
 
 fast_burst = 0.45;
 slow_burst = 0.3;
 %Bursts 0.45cm/s for 0.02s Decay till 0.3cm/s over 0.02s, Then 0.45cm/s for
 %0.02s Decay till 0.15cm/s over 0.02s, Then 0.25cm/s for 0.02s Decay till swimming speed over 0.02s 
+
+fast_herring = 134.0;
+slow_herring = 70.0;
 
 %generate all copepod agents and record their positions in ENV_MAT_C
 for c=1:nc
@@ -42,7 +45,7 @@ for c=1:nc
     % 0.1 -0.5 cm/s
     max_speed = rand_between(slow_copes, fast_copes);
 
-    burst_speed= rand_between(slow_burst, fast_burst);
+    burst_speed = rand_between(slow_burst, fast_burst);
     
     agent{c}=copepod(pos,vel,max_speed,burst_speed);
 end
@@ -53,7 +56,9 @@ for h=nc+1:nc+nh
     %create herring agents with random ages between 0 and 10 days and random
     %food levels 20-40
     vel = hvec(h-nc,:);
-    max_speed = 25;
+    max_speed = rand_between(slow_herring, fast_herring);
+    % Not really using max_hunt_speed
     max_hunt_speed = 30;
+    
     agent{h}=herring(pos, vel, max_speed, max_hunt_speed);
 end

@@ -49,9 +49,14 @@ tot_sep_force = [0.0,0.0];
 tot_align_force = [0.0,0.0];
 % Cohesion force:
 tot_cohes_force = [0.0, 0.0];  
+
+
+
 for fish = 1:length(nearby_herring)
+    
+    fish_i = nearby_herring(fish);
     % Separation force:
-    tot_sep_force = [-6.3,-4.3];
+    tot_sep_force = tot_sep_force + agt.calc_sep_force(fish_i);
     % Alignment force:
     tot_align_force = [3.3,1.2];
     % Cohesion force:
