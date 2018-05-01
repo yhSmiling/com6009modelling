@@ -72,8 +72,9 @@ overall_force = [(maxrand-minrand)*rand + minrand, (maxrand-minrand)*rand + minr
 movement_vect = steer(agt.vel, overall_force);
 % BUG(Pierre): Something is going wrong in steer, where the first value is
 % never negative.
-movement_vect
 agt.vel = movement_vect;
+
+%agt.vel = movement_vect;
 agt.pos = agt.pos + agt.vel;
 % TODO(Pierre): Some function that Steers based on force. Like it
 % shouldn't turn too fast or go faster than herring can go.

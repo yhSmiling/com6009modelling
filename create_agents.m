@@ -17,10 +17,10 @@ function [agent]=create_agents(nc,nh)
  global ENV_DATA MESSAGES PARAM 
   
 bm_size=ENV_DATA.bm_size;
-cloc=((bm_size-1) / 2)*rand(nc,2)+1;     %generate random initial positions for copepods
-hloc=((bm_size-1) / 2)*rand(nh,2)+1;      %generate random initial positions for herring
+cloc=((bm_size-1))*rand(nc,2)+1;     %generate random initial positions for copepods
+hloc=((bm_size-1))*rand(nh,2)+1;      %generate random initial positions for herring
+hvec = (bm_size/20) * rand(nh,2); % Setting the speed of the herring
 
-rand(nh,2)
 
 MESSAGES.pos=[cloc;hloc];
 
@@ -40,7 +40,7 @@ for h=nc+1:nc+nh
     pos=hloc(h-nc,:);
     %create herring agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    vel = [1.2;1.8];
+    vel = hvec(h-nc,:);
     max_speed = 25;
     max_hunt_speed = 30;
     agent{h}=herring(pos, vel, max_speed, max_hunt_speed);

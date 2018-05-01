@@ -80,15 +80,24 @@ function plot_results(agent,nsteps,fmode,outImages)
         set(hs,'SpecularExponent',1);       %sets up lighting
         set(hs,'SpecularStrength',0.1);
         hold on
+        
+        
 
         for cn=1:length(agent)                          %cycle through each agent in turn
             if typ(cn)>0                                %only plot live agents
                 pos=get(agent{cn},'pos');               %extract current position    
+                vel=get(agent{cn},'vel'); % WHY IS THIS A COLUMN
+                
                 if isa(agent{cn},'copepod')              %choose plot colour depending on agent type
                     co=plot(pos(1),pos(2),'r*');
                 else
                     ho=plot(pos(1),pos(2),'b.');
                     set(ho,'MarkerSize',30);
+                    
+                    % Drawing the arrow
+                    arrow_end = [pos(1) + vel(1), pos(2) + vel(2)];
+                    drawArrow(pos, arrow_end);
+                    hold on
                 end
             end
         end
