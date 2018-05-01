@@ -23,8 +23,10 @@ global IT_STATS N_IT ENV_DATA MESSAGES
    %    ENV_DATA.food is  a bm_size x bm_size array containing distribution
    %    of food
    
+% TODO: Set this randomly? Between 6 and 21.9
+body_size = 14;
 % TODO(Pierre): This should probably be set as a param of the agent
-sense_radius = 5;
+sense_radius = 5*body_size;
 % NOTE(Pierre): This generates an array of all of the agents that are
 % within sensing radius.
 nearby_herring = extract_local_agents(agt,sense_radius,2);
