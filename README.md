@@ -64,28 +64,36 @@ Part A and B happen in parallel
      - Increased survival from predators
      - Increased hunting effectiveness
 
-1. Part A: (Writing the model) [Due 14th May]
+1. Part A: (Writing the model) [Due 14th May] 6th May
    - Develop
      - Tasks to do:
-	   - Fix steering bug
-	   - Herring (Predator) Cohesion
-	   - Herring (Predator) Separation
-	   - Herring (Predator) Alignment
-	   - Hurring (Predator) Hunting
-	   - Copepod (Prey) avoid behaviour
-	   - Copepod (Prey) random move behaviour
-	   - Draw arrow vectors for copepods
-	   - Implement accurate numbers
+	   - Fix steering bug (Pierre)
+	   - Herring (Predator) Cohesion (Pierre)
+	   - Herring (Predator) Separation (Pierre)
+	   - Herring (Predator) Alignment (Pierre)
+	   - Hurring (Predator) Hunting (Pierre)
+	   - Copepod (Prey) avoid behaviour (Yang)
+	   - Copepod (Prey) random move behaviour (Yang) 
+	   - Draw arrow vectors for copepods (Cheng) 3rd May
+	   - Implement accurate numbers (Anna + Pierre)
+	   - Change environment
    - Test
      - Are there bugs?
 	 - Are herring flocking?
+	   - Qualitative assessment
 	 - Are copepods escaping?
-   - Experiment
+	   - Qualitative assessment
+   - Experiment 4th May
      - Design experiments
+	   - Environment Size
+	   - Write 1 page of experiment design (Anna)
+	     - Preparation
+		 - Procedure
+		 - Expectation
 	 - Run experiments
 	 - Collect results
    - Analysis
-	 - Implement graphs
+	 - Implement graphs/statistics (Yang + Cheng)
    - Optimise
      - If we have time (we don't)
 
@@ -93,7 +101,7 @@ Part A and B happen in parallel
    - Overview of ABMs
    - Detailed review of one
 		
-3. Part C? (Full Report) [Total < 8 pages] [Due 14th May]
+3. Part C? (Full Report) [Total < 8 pages] [Due 14th May] 11th May
    - Abstract [200 words]
    - Intro and Background [2 pages - basically the Lit Review]
    - Modelling Methodology [1-2 pages]
