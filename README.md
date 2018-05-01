@@ -66,10 +66,28 @@ Part A and B happen in parallel
 
 1. Part A: (Writing the model) [Due 14th May]
    - Develop
+     - Tasks to do:
+	   - Fix steering bug
+	   - Herring (Predator) Cohesion
+	   - Herring (Predator) Separation
+	   - Herring (Predator) Alignment
+	   - Hurring (Predator) Hunting
+	   - Copepod (Prey) avoid behaviour
+	   - Copepod (Prey) random move behaviour
+	   - Draw arrow vectors for copepods
+	   - Implement accurate numbers
    - Test
+     - Are there bugs?
+	 - Are herring flocking?
+	 - Are copepods escaping?
    - Experiment
+     - Design experiments
+	 - Run experiments
+	 - Collect results
    - Analysis
+	 - Implement graphs
    - Optimise
+     - If we have time (we don't)
 
 2. Part B: (Literature Review) [Due 14th May]
    - Overview of ABMs
@@ -79,6 +97,8 @@ Part A and B happen in parallel
    - Abstract [200 words]
    - Intro and Background [2 pages - basically the Lit Review]
    - Modelling Methodology [1-2 pages]
+     - Explain our code
+	 - Adapt diagram
    - Results
      - Model Predictions [~2 pages]
      - Computational efficiency [< 1 page]
