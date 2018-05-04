@@ -50,7 +50,8 @@ tot_align_force = [0.0,0.0];
 % Cohesion force:
 tot_cohes_force = [0.0, 0.0];  
 
-
+align_sum = [0.0, 0.0];
+align_count = 0;
 
 for fish = 1:length(nearby_herring)
     
@@ -58,10 +59,19 @@ for fish = 1:length(nearby_herring)
     % Separation force:
     tot_sep_force = tot_sep_force + agt.calc_sep_force(fish_i, sep_radius);
     % Alignment force:
-    tot_align_force = [3.3,1.2];
+    align_force = agt.calc_align_force(fish_i, align_radius);
+    if align_force ~= [0.0,0.0]
+        align_count = align_count + 1;
+        align_sum = align_sum + align_force;
+    end
     % Cohesion force:
     tot_cohes_force = [2.7, 0.1];   
+    
 end
+
+tot_align_force = align_sum./align_count;
+
+    
 
 % hunt_weight = 0.8
 sep_weight = 0.6;
