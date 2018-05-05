@@ -30,6 +30,7 @@ sense_radius = 5*body_size;
 % NOTE(Pierre): This generates an array of all of the agents that are
 % within sensing radius.
 nearby_herring = extract_local_agents(agt,sense_radius,2);
+nearby_copepods = extract_local_agents(agt,sense_radius,1);
 % TODO(Pierre): We need something like MESSAGES.Vect, which contains all
 % the vectors for the 
 
@@ -58,41 +59,63 @@ for fish = 1:length(nearby_herring)
     fish_i = nearby_herring(fish);
     % Separation force:
     tot_sep_force = tot_sep_force + agt.calc_sep_force(fish_i, sep_radius);
+    
     % Alignment force:
     align_force = agt.calc_align_force(fish_i, align_radius);
     if align_force ~= [0.0,0.0]
         align_count = align_count + 1;
         align_sum = align_sum + align_force;
-    end
-    % Cohesion force:
-    tot_cohes_force = [2.7, 0.1];   
+    end 
     
 end
 
-tot_align_force = align_sum./align_count;
+% Cohesion force:
+tot_cohes_force = tot_cohes_force + agt.calc_cohesion_force(nearby_herring);  
 
+% Final align force
+if align_count > 0
+    tot_align_force = align_sum./align_count;
+else
+    tot_align_force = [0.0,0.0]
+end
+% tot_sep_force
+% tot_align_force
+% tot_cohes_force
+
+tot_hunt_force = agt.calc_hunt_force( nearby_copepods );
     
 
-% hunt_weight = 0.8
-sep_weight = 0.6;
-align_weight = 0.25;
-cohes_weight = 0.15;
-overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * tot_cohes_force);
+hunt_weight = 0.7;
+sep_weight = 0.1;
+align_weight = 0.1;
+cohes_weight = 0.1;
+overall_force = (sep_weight * tot_sep_force) + (align_weight * tot_align_force) + (cohes_weight * tot_cohes_force) + (hunt_weight * tot_hunt_force);
 % BUG(Pierre): Looks like some of these vels are getting set to 0 at the
 % start for some reason? Maybe getting the indexes wrong/confused with
 % copepods?
 
+
+
 % BUG(Pierre): They always seem to go in the positive direction? Why?
-minrand = -0.5;
-maxrand = 0.5;
-overall_force = [(maxrand-minrand)*rand + minrand, (maxrand-minrand)*rand + minrand];
 movement_vect = steer(agt.vel, overall_force);
+
+% If it has no reason to go anywhere, it will explore randomly.
+if movement_vect == [0.0, 0.0]
+    explore_speed = agt.max_speed * 0.5;
+    min_explore = -explore_speed;
+    max_explore = explore_speed;
+    
+    rand_x = rand_between(min_explore, max_explore);
+    rand_y = rand_between(min_explore, max_explore);
+    explore_force = [rand_x, rand_y];
+    movement_vect = steer(agt.vel, explore_force);
+end
 % BUG(Pierre): Something is going wrong in steer, where the first value is
 % never negative.
 agt.vel = movement_vect;
 
-%agt.vel = movement_vect;
 agt.pos = agt.pos + agt.vel;
+
 % TODO(Pierre): Some function that Steers based on force. Like it
 % shouldn't turn too fast or go faster than herring can go.
 % Desired velocity, current velocity
