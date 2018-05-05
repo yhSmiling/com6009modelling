@@ -11,7 +11,7 @@ global MESSAGES
     if dist < align_dist
         output_force = MESSAGES.vel(target,:);
     else
-        output_force = [0.0, 0.0]
+        output_force = [0.0, 0.0];
     
 
 end

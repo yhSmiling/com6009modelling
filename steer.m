@@ -13,7 +13,13 @@ desired_speed = norm(desired_vect);
 
 % This gives the angle between the two vectors in degrees. Value between 0
 % and 180
-angle_diff = acosd(dot(curr_vect, desired_vect) / (curr_speed * desired_speed));
+curr_desired_prod = curr_speed * desired_speed;
+if curr_desired_prod > 0
+    angle_diff = acosd(dot(curr_vect, desired_vect) / (curr_speed * desired_speed));
+else
+    angle_diff = 0;
+end
+
 if angle_diff > max_turning_rate
     
     current_angle = atand(curr_vect(2)/curr_vect(1));
